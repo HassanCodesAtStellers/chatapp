@@ -1,6 +1,9 @@
 # Node.js dependencies
 node_modules/
 
+# Ignore config/env.config.js file
+./server/config/env.config.js
+
 # Logs
 logs
 *.log

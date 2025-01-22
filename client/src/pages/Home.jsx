@@ -1,31 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { signOutUser } from "../services/Api.jsx";
+import React from "react";
+import { LogoutBtn } from "../components";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  const handleOnSubmit = async () => {
-    try {
-      const response = await signOutUser();
-
-      if (response) {
-        localStorage.removeItem("jwtToken");
-        console.log("user Logged out successfully");
-        navigate("/signin");
-      }
-    } catch (error) {
-      console.error(
-        "Error during sign out:",
-        error.response?.data || error.message
-      );
-      alert(error.response?.data?.message || "Failed to log out.");
-    }
-  };
-  return (
+  const isAuthenticated = localStorage.getItem("jwtToken");
+  return isAuthenticated ? (
     <>
       <div>Home</div>
-      <button onClick={handleOnSubmit}>Sign Out</button>
+      <LogoutBtn />
+    </>
+  ) : (
+    <>
+      <div>Home</div>
+      <h1>Not Authenticated</h1>
     </>
   );
 };

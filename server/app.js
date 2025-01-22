@@ -22,7 +22,7 @@ app.use(compression());
 app.use(
   cors({
     origin: config.cors_origin,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
   })
 );

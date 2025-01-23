@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, Dashboard, NotFound, Signin, Register } from "./pages";
+import { Home, Dashboard, NotFound, ChatRoom, Signin, Register } from "./pages";
 import { PrivateRoutes } from "./components";
 
 const App = () => {
@@ -15,6 +15,14 @@ const App = () => {
           element={
             <PrivateRoutes>
               <Dashboard />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/chat-room"
+          element={
+            <PrivateRoutes>
+              <ChatRoom />
             </PrivateRoutes>
           }
         />

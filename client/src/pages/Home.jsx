@@ -1,5 +1,6 @@
 import React from "react";
 import { LogoutBtn } from "../components";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const isAuthenticated = localStorage.getItem("jwtToken");
@@ -7,6 +8,8 @@ const Home = () => {
     <>
       <div>Home</div>
       <LogoutBtn />
+      <NavLink to={"/dashboard"}>Dasbboard</NavLink>
+      <NavLink to={"/chat-room"}>Chat Room</NavLink>
     </>
   ) : (
     <>

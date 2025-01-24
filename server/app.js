@@ -10,6 +10,7 @@ import config from "./config/env.config.js";
 import authRoutes from "./route/auth.route.js";
 import userRoutes from "./route/user.route.js";
 import chatRoutes from "./route/chat.route.js";
+import messageRoutes from "./route/message.route.js";
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use(
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/chat", chatRoutes);
+app.use("/api/v1/message", messageRoutes);
 
 export default app;

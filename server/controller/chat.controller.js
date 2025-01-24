@@ -1,5 +1,6 @@
 import User from "../model/user.model.js";
 import Chat from "../model/chat.model.js";
+import Message from "../model/message.model.js";
 import { removeElementDuplications } from "../util/arrayMethods.js";
 
 export const getChatRooms = async (req, res) => {
@@ -45,7 +46,7 @@ export const createChatRoom = async (req, res) => {
 
     const filteredUsers = removeElementDuplications(userId);
 
-    const newChat = await Chat.create({
+    const newChat = new Chat({
       participants: filteredUsers,
       chatName,
     });
@@ -61,4 +62,30 @@ export const createChatRoom = async (req, res) => {
   }
 };
 
+export const getChatRoomMessages = async (req, res) => {
+  const { chatId } = req.params;
+  try {
+    const chat = await Chat.findById(chatId);
+    if (!chat) {
+      return res
+        .status(404)
+        .json({ message: "Room not found", success: false });
+    }
 
+    const messages = await Message.find({ chat: chatId })
+      .populate("sender", "username email")
+      .populate("content");
+
+    if (!messages) {
+      return res
+        .status(404)
+        .json({ message: "No messages found", success: false });
+    }
+
+    return res
+     .status(200)
+     .json({ message: "Messages fetched successfully", success: true, messages });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
+  }
+};

@@ -15,10 +15,6 @@ const messageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Chat",
     },
-    timestamp: {
-      type: Date,
-      default: Date.now,
-    },
   },
   { timestamps: true }
 );
